@@ -12,7 +12,7 @@ def test_find():
     assert repo.select_users_params['first_name'] == first_name
     assert response['type'] == 'Users'
     assert response['count'] == len(response['attributes'])
-    assert not response['attributes']
+    assert response['attributes']
 
 def test_find_fail_in_valid_name():
     first_name = "Nome123"

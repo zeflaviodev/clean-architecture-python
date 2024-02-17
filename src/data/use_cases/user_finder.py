@@ -1,8 +1,8 @@
-#pylint: disable=broad-exception-raised
 from typing import Dict, List
 from src.domain.use_cases.user_finder import UserFinder as UserFinderInterface
 from src.data.interfaces.users_repository import UsersRepositoryInterface
 from src.domain.models.users import Users
+from src.errors.types import HttpNotFoundError, HttpBadRequestError
 
 class UserFinder(UserFinderInterface):
     def __init__(self, user_repository: UsersRepositoryInterface):
@@ -20,15 +20,15 @@ class UserFinder(UserFinderInterface):
     @classmethod
     def __validate_name(cls, first_name: str) -> None:
         if not first_name.isalpha():
-            raise Exception('Nome invalido para a busca')
+            raise HttpBadRequestError('Nome invalido para a busca')
 
         if len(first_name) > 18 :
-            raise Exception('Nome muito grande para a busca')
+            raise HttpBadRequestError('Nome muito grande para a busca')
 
     def __search_user(self, first_name: str) -> List[Users]:
 
         users = self.__users_repository.select_users(first_name)
-        if not users: raise Exception('Nenhum usuario encontrado')
+        if not users: raise HttpNotFoundError('Nenhum usuario encontrado')
         return users
 
     @classmethod
