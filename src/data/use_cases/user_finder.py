@@ -26,6 +26,7 @@ class UserFinder(UserFinderInterface):
             raise Exception('Nome muito grande para a busca')
 
     def __search_user(self, first_name: str) -> List[Users]:
+
         users = self.__users_repository.select_users(first_name)
         if not users: raise Exception('Nenhum usuario encontrado')
         return users

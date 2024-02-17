@@ -54,7 +54,7 @@ def test_select_user():
         age=mocked_age
     )
 
-    response = user_repository.select_user(fisrt_name=mocked_first_name)
+    response = user_repository.select_users(fisrt_name=mocked_first_name)
 
     data = response[0]
 

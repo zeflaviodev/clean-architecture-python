@@ -1,8 +1,9 @@
+from typing import List
+
 from src.infra.db.settings.connection import DBConnectionHandler
 from src.infra.db.entities.users import Users as UsersEntity
 from src.data.interfaces.users_repository import UsersRepositoryInterface
 from src.domain.models.users import Users
-from typing import List
 
 class UsersRepository(UsersRepositoryInterface):
 
@@ -22,7 +23,7 @@ class UsersRepository(UsersRepositoryInterface):
                 raise exception
 
     @classmethod
-    def select_user(cls, fisrt_name: str) -> List[Users]:
+    def select_users(cls, fisrt_name: str) -> List[Users]:
         with DBConnectionHandler() as db_connection:
             try:
                 data = (
